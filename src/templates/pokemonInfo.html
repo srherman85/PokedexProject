@@ -1,0 +1,88 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Info</title>
+    <style>
+        /* CSS to capitalize first letter of each word */
+        .capitalize {
+            text-transform: capitalize;
+        }
+    </style>
+     <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header_container">
+            <header>Pokémon Information</header>
+        </div>
+
+        <div class="form_container">
+            <form action="/" method="post">
+                <div class="form_label">
+                    <label for="pokemon_number">Enter Pokémon Name or Pokedex Number:</label>
+                </div>
+                <div class="input_container">
+                    <input class="input_box" type="text" id="pokemon_number" name="pokemon">
+                </div>
+                <div class="button_container">
+                    <button class="input_button" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="main_container">
+            <div class="pokemon_image_container">
+                <img class="pokemon_image" src="assets/{{ pokemon.number }}.png">
+            </div>
+
+            <div class="pokemon_info_container">
+                <div class="name_number_container">
+                    <div class="name_container">
+                        <p class="pokemon_name">{{ pokemon.name }}</p>
+                    </div>
+                </div>
+
+                <div class="type_container">
+                    <div class="type_header">
+                        <p>Type(s): {{ '/'.join(pokemon.types) }}</p>
+                    </div>
+                    <div class="pokemon_type_container">
+                        <p class="pokemon_type">{{ pokemon.types }}</p>
+                    </div>
+                </div>
+
+                <div class="abilities_container">
+                    <div class="abilities_header">
+                        <p>Abilities:</p>
+                    </div>
+                    <div class="abilities_container">
+                        {% for ability in pokemon.abilities %}
+                        <p class="ability">{{ ability }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="pokemon_stats_container">
+                <div>
+                    <p class="stats_header">Stats:</p>
+                </div>
+                <div class="stats_body">
+                    {% for stat_name, stat_value in pokemon.stats.items() %}
+                    <div class="stat_container">
+                        <div class="stat_name">
+                            <p>{{ stat_name }}:</p>
+                        </div>
+                        <div class="stat_value">
+                            <p>{{ stat_value }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

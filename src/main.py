@@ -191,60 +191,6 @@ def is_valid_pokemon_number(pokemon_number):
         print(f"Error checking Pokemon number: {e}")
         return False
 
-@app.route('/teamlist')
-def teamlist():
-    # Get the directory path where this script resides
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    # Construct the absolute file path to the JSON file
-    json_file_path = os.path.join(current_dir, 'data_files', 'teamlist.json')
-
-    # Check if the file exists
-    if not os.path.exists(json_file_path):
-        raise FileNotFoundError(f"File not found: {json_file_path}")
-
-    # Load team members data from JSON file
-    with open(json_file_path, 'r') as file:
-        team_data = json.load(file)
-
-    # Modify the team data to include Pokemon instances
-    for member in team_data['team_members']:
-        # Extract name and number from each pokemon dictionary
-        pokemon_data = member['pokemon']
-        member['pokemon'] = [
-            SimplePokemon(pokemon['name'], pokemon['number']) for pokemon in pokemon_data
-        ]
-
-    return render_template('teamlist.html', team_members=team_data["team_members"])
-
-@app.route('/edit/<int:member_index>', methods=['GET', 'POST'])
-def edit_member(member_index):
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    json_file_path = os.path.join(current_dir, 'data_files', 'teamlist.json')
-
-    with open(json_file_path, 'r') as file:
-        team_data = json.load(file)
-
-    member = team_data['team_members'][member_index - 1]
-
-    if request.method == 'POST':
-        new_pokemon_data = []
-        for i in range(1, 7):
-            pokemon_name = request.form[f'pokemon_name_{i}']
-
-            # Fetch the Pokémon number from the PokeAPI
-            pokemon_number = get_number_from_name(pokemon_name)
-
-            new_pokemon_data.append({"name": pokemon_name, "number": str(pokemon_number)})
-
-        # Update the Pokémon team data in the JSON file
-        team_data['team_members'][member_index - 1]['pokemon'] = new_pokemon_data
-        with open(json_file_path, 'w') as file:
-            json.dump(team_data, file, indent=4)
-
-        return redirect(url_for('teamlist'))
-
-    return render_template('edit_member.html', member=member)
-
 def get_number_from_name(name):
     try:
         if " " in name:

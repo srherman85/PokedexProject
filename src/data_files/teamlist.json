@@ -1,0 +1,207 @@
+{
+    "team_members": [
+        {
+            "name": "sherman",
+            "pokemon": [
+                {
+                    "name": "pikachu",
+                    "number": "25"
+                },
+                {
+                    "name": "Hawlucha",
+                    "number": "701"
+                },
+                {
+                    "name": "Flutter Mane",
+                    "number": "987"
+                },
+                {
+                    "name": "dondozo",
+                    "number": "977"
+                },
+                {
+                    "name": "iron-hands",
+                    "number": "992"
+                },
+                {
+                    "name": "iron-bundle",
+                    "number": "991"
+                }
+            ]
+        },
+        {
+            "name": "bsiffer",
+            "pokemon": [
+                {
+                    "name": "charizard",
+                    "number": "6"
+                },
+                {
+                    "name": "bulbasaur",
+                    "number": "1"
+                },
+                {
+                    "name": "arbok",
+                    "number": "24"
+                },
+                {
+                    "name": "avalugg",
+                    "number": "713"
+                },
+                {
+                    "name": "raichu",
+                    "number": "26"
+                },
+                {
+                    "name": "pecharunt",
+                    "number": "1025"
+                }
+            ]
+        },
+        {
+            "name": "dkozlova",
+            "pokemon": [
+                {
+                    "name": "vullaby",
+                    "number": 629
+                },
+                {
+                    "name": "farfetchd",
+                    "number": 83
+                },
+                {
+                    "name": "metapod",
+                    "number": 11
+                },
+                {
+                    "name": "piloswine",
+                    "number": 221
+                },
+                {
+                    "name": "duraludon",
+                    "number": 884
+                },
+                {
+                    "name": "mantyke",
+                    "number": 458
+                }
+            ]
+        },
+        {
+            "name": "dmiranda",
+            "pokemon": [
+                {
+                    "name": "morpeko-full-belly",
+                    "number": "877"
+                },
+                {
+                    "name": "frigibax",
+                    "number": "996"
+                },
+                {
+                    "name": "ribombee",
+                    "number": "743"
+                },
+                {
+                    "name": "carkol",
+                    "number": "838"
+                },
+                {
+                    "name": "rhydon",
+                    "number": "112"
+                },
+                {
+                    "name": "nidoking",
+                    "number": "34"
+                }
+            ]
+        },
+        {
+            "name": "jasfoury",
+            "pokemon": [
+                {
+                    "name": "anorith",
+                    "number": 347
+                },
+                {
+                    "name": "meowth",
+                    "number": 52
+                },
+                {
+                    "name": "girafarig",
+                    "number": 203
+                },
+                {
+                    "name": "kangaskhan",
+                    "number": 115
+                },
+                {
+                    "name": "snorunt",
+                    "number": 361
+                },
+                {
+                    "name": "kricketot",
+                    "number": 401
+                }
+            ]
+        },
+        {
+            "name": "aseay",
+            "pokemon": [
+                {
+                    "name": "bulbasaur",
+                    "number": "1"
+                },
+                {
+                    "name": "farfetchd",
+                    "number": "83"
+                },
+                {
+                    "name": "metapod",
+                    "number": "11"
+                },
+                {
+                    "name": "piloswine",
+                    "number": "221"
+                },
+                {
+                    "name": "duraludon",
+                    "number": "884"
+                },
+                {
+                    "name": "mantyke",
+                    "number": "458"
+                }
+            ]
+        },
+        {
+            "name": "ajaramillo",
+            "pokemon": [
+                {
+                    "name": "pikachu",
+                    "number": 25
+                },
+                {
+                    "name": "dusclops",
+                    "number": 356
+                },
+                {
+                    "name": "dusknoir",
+                    "number": 477
+                },
+                {
+                    "name": "pelipper",
+                    "number": 279
+                },
+                {
+                    "name": "ferroseed",
+                    "number": 597
+                },
+                {
+                    "name": "ariados",
+                    "number": 168
+                }
+            ]
+        }
+    ]
+}

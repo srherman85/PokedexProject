@@ -1,73 +1,189 @@
+/* All content on the page */
 body {
-  font-family: Roboto;
-  color: black;
-  margin-top: 0;
-  margin-left: 0;
-  margin-right: 0;
-  margin-bottom: 100px;
-  overflow-x: hidden;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 .container {
   position: relative;
 }
 
-/* Contains Pokemon Information */
+
+
+/* Red banner on top. Contains Pokemon Information on
+ initial page, and displays the Pokemon name when the
+ site is on a specific Pokemon. */
 .header_container {
-  width: 100%;
-  background-color: red;
-  text-align: center;
-  z-index: 1000; /* Ensure the header is on top */
-  font-size: 60px;
-  font-weight: 800;
-  padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
 }
 
+a {
+    color: #FFFFFF; /* Default color for links */
+    text-decoration: none; /* Remove underline by default */
+}
+
+a:hover {
+    color: #FFFFFF; /* Color when the link is hovered over */
+}
+
+a:visited {
+    color: #FFFFFF; /* Color for visited links */
+}
+
+a:active {
+    color: #FFFFFF; /* Color when the link is active (being clicked) */
+}
+
+.header_name_container {
+    text-align: center;
+    flex-grow: 1;
+}
+
+.header_name_container header {
+    font-size: 36px;
+}
+
+/* Contains the entire form box.  */
 .form_container {
-  padding: 10px;
-  display: grid;
-  grid-template-rows: auto auto auto;
-  gap: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
 }
 
-.form_label {
-  font-size: 30px;
+.form_label, .team_label {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 10px; /* Add some space below the label */
 }
 
-.input_box {
+/* Dropdown styling */
+.team_selection select {
+  width: 100%; /* Set the width to fill the available space */
   height: 40px;
-  width: 1000px;
-  font-size: 30px;
-  border-width: 2px;
-  margin-top: 20px;
+  font-size: 18px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  border: 2px solid #333; /* Add a border */
+  border-radius: 5px; /* Add border radius */
+  background-color: #fff; /* Background color */
+  color: #333; /* Text color */
 }
 
-.input_button {
-  height: 50px;
-  background-color: red;
-  font-size: 30px;
-  margin-top: 20px;
+.team_selection select:focus {
+  outline: none; /* Remove outline on focus */
+  border-color: #555; /* Change border color on focus */
 }
 
+/* Style dropdown arrow */
+.team_selection select::-ms-expand {
+  display: none; /* Hide arrow on IE and Edge */
+}
+
+.team_selection select option {
+  font-size: 18px;
+}
+
+/* Center the input box */
+.input_container {
+    text-align: center;
+}
+
+/* Set the width of the input box */
+.input_box {
+    width: calc(100% - 5px); /* Calculate the width to fill the available space, considering padding */
+    height: 40px;
+    font-size: 24px;
+    margin-top: 10px;
+    padding: 5px 10px;
+}
+
+/* Center the buttons and add space between them */
+.button_container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Add space between buttons */
+.input_button, .random_button, .teamlist_button {
+    margin: 0 5px; /* Adjust as needed */
+    width: 150px;
+    height: 50px;
+    font-size: 18px;
+}
+
+.my_teams_button {
+    background-color: #333; /* Change to your desired color */
+    color: #FFFFFF; /* Text color for contrast */
+}
+
+/* Align the form container on the page */
+.form_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto; /* Center horizontally */
+    max-width: 600px; /* Set a maximum width for the form container */
+}
+
+.error_message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.team_container {
+    text-align: center;
+    margin-top: 20px; /* Add space between the form and team section */
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    flex-direction: column; /* Arrange items vertically */
+}
+
+/* Contains everything outside of the header and form container */
 .main_container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  text-align: center;
+    margin-right: 50px;
+    margin-left: 50px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+    gap: 20px; /* Gap between grid items */
 }
-
 
 .pokemon_image_container {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center vertically */
 }
 
+/* Actual image of the Pokemon */
 .pokemon_image {
-  height: flex;
+    max-width: 100%; /* Ensure the image doesn't exceed its container */
+    height: auto; /* Preserve aspect ratio */
 }
 
+/* Contains name, type(s), abilities, and stats */
 .pokemon_info_container {
   display: grid;
   grid-template-rows: auto auto auto;
 }
 
+/* Contains the name/number of Pokemon */
 .name_number_container {
   font-size: 30px;
   display: flex;
@@ -78,6 +194,7 @@ body {
   height: 100%;
 }
 
+/* Actual name/number of Pokemon */
 .pokemon_name {
   font-size: 50px;
   font-weight: 800;
@@ -85,45 +202,70 @@ body {
   margin-top: 0; /* Remove any default margin for precise positioning */
 }
 
+/* Contains name of Pokemon */
 .name_container {
   text-align: center; /* Center the text horizontally */
   width: 100%; /* Ensure the container takes up the full width */
 }
 
+/* Contains type information */
+.type_container {
+    justify-content: center;
+}
+
+.type_name {
+    text-align: center;
+}
 
 .type_header, .abilities_header, .stats_header {
   font-size: 30px;
   font-weight: 800;
+  text-align: center;
 }
 
 .pokemon_type, .ability {
   font-size: 18px;
+  text-align: center;
 }
 
-.pokemon_stats_container {
-  margin-top: 20px;
+.stats_header {
+    margin-bottom: 30px;
 }
 
-.stats_body {
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+.stats_container {
+    font-family: 'Roboto', sans-serif; /* Match the font with other contents */
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    flex-direction: column; /* Arrange items vertically */
 }
 
-.stat_container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.stat_row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px; /* Add some spacing between rows */
+    width: 100%;
 }
 
-.stat_name {
-  font-size: 20px;
-  font-weight: 600;
-  text-align: right;
-  padding-right: 20px;
+.stat_label,
+.stat_value {
+    font-size: 30px; /* Set font size to match other text */
+    font-weight: 500; /* Adjust font weight as needed */
+    height: 100%; /* Ensure the elements fit the container vertically */
+    align-items: center; /* Center vertically */
+    box-sizing: border-box;
+    padding: 0 30px;
+}
+
+.stat_label {
+    text-align: right; /* Align stat names to the right */
+    margin-right: 10px; /* Add some space between stat name and value */
 }
 
 .stat_value {
-  font-size: 20px;
-  text-align: left;
+    width: 50%;
 }
 
 .ability-container {
@@ -148,6 +290,58 @@ position: relative
  border-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+/* Displays when hovering over an ability */
 .ability:hover + .ability-effect-container {
  display: block
+}
+
+.pokeball_image, .pokemon_icon {
+    height: 80px;
+    padding: 0;
+    margin: 0;
+}
+
+/* Puts content horizontally when screen gets big */
+@media screen and (min-width: 890px) {
+    .main_container {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr 1fr !important;
+    }
+
+    .header_container {
+          grid-template-columns: 1fr 1fr 1fr;
+}
+}
+
+/* Puts content vertically when screen gets small */
+@media screen and (max-width: 890px) {
+    .main_container {
+        display: grid !important;
+        grid-template-rows: 1fr 1fr 1fr !important;
+    }
+
+    .header_name_container, .pokeball_image_container {
+    display: none;
+}
+
+    .header_container {
+         grid-template-columns: 1fr;
+}
+}
+
+.pokemon_type_container {
+    display: flex; /* Use flexbox layout */
+    flex-wrap: wrap; /* Allow wrapping of items to new lines if needed */
+    justify-content: center;
+}
+
+.type_display {
+    margin-right: 10px; /* Add some spacing between type elements */
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.type_name {
+    font-size: 20px;
+    font-weight: 500;
 }

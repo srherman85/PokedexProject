@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0 (Python 3.11.4 on win32)" generated="2024-04-29T19:59:41.939189" rpa="false" schemaversion="5">
+<suite id="s1" name="Test" source="C:\Users\shann\OneDrive\Documents\GitHub\GitHub-Desktop-Week3\project-g3-g3-csc-256-0001\src\tests\Automations\test.robot">
+<test id="s1-t1" name="Test Index Page Header" line="9">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:42.399591" level="INFO">Opening browser 'chrome' to base url 'http://localhost:5000'.</msg>
+<msg time="2024-04-29T19:59:43.058962" level="WARN">The chromedriver version (123.0.6312.122) detected in PATH at C:\Windows\chromedriver.exe might not be compatible with the detected chrome version (124.0.6367.61); currently, chromedriver 124.0.6367.91 is recommended for chrome 124.*, so it is advised to delete the driver in PATH and retry</msg>
+<arg>${BASE_URL}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2024-04-29T19:59:42.399591" elapsed="4.948227"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:51.458733" level="INFO">Current page contains text 'Enter Pokémon Name or Pokedex Number:'.</msg>
+<arg>Enter Pokémon Name or Pokedex Number:</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2024-04-29T19:59:47.353655" elapsed="4.106111"/>
+</kw>
+<status status="PASS" start="2024-04-29T19:59:42.398489" elapsed="9.063276"/>
+</test>
+<test id="s1-t2" name="Check Dropdown Options Count" line="13">
+<kw name="Get Matching Xpath Count">
+<kw name="Get WebElements" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:51.508819" level="INFO">${elements} = [&lt;selenium.webdriver.remote.webelement.WebElement (session="109155bacc156db1331b3ec1fb4d658e", element="f.661A14CE12B2F668A2BB46A3FD46BEB9.d.66618B02ABD09845A0CC1D2ADDF6288B.e.23")&gt;, &lt;selenium.webdriv...</msg>
+<var>${elements}</var>
+<arg>xpath=${xpath}</arg>
+<doc>Returns a list of WebElement objects matching the ``locator``.</doc>
+<status status="PASS" start="2024-04-29T19:59:51.468651" elapsed="0.040168"/>
+</kw>
+<return>
+<value>${elements.__len__() - 1}</value>
+<status status="PASS" start="2024-04-29T19:59:51.511293" elapsed="0.001012"/>
+</return>
+<msg time="2024-04-29T19:59:51.514859" level="INFO">${options_count} = 7</msg>
+<var>${options_count}</var>
+<arg>//select[@id='team_dropdown']/option</arg>
+<status status="PASS" start="2024-04-29T19:59:51.465641" elapsed="0.049218"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2024-04-29T19:59:51.518290" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${options_count}</arg>
+<arg>7</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2024-04-29T19:59:51.517287" elapsed="0.001003"/>
+</kw>
+<status status="PASS" start="2024-04-29T19:59:51.463272" elapsed="0.055018"/>
+</test>
+<test id="s1-t3" name="Test 25 in Input Box" line="18">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:51.525502" level="INFO">Typing text '25' into text field 'id=pokemon_number'.</msg>
+<arg>id=pokemon_number</arg>
+<arg>25</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-29T19:59:51.523628" elapsed="0.655475"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:52.182678" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-29T19:59:52.181103" elapsed="1.945503"/>
+</kw>
+<kw name="Location Should Be" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:54.140658" level="INFO">Current location is 'http://localhost:5000/pokemon_details/25'.</msg>
+<arg>http://localhost:5000/pokemon_details/25</arg>
+<doc>Verifies that the current URL is exactly ``url``.</doc>
+<status status="PASS" start="2024-04-29T19:59:54.127628" elapsed="0.013311"/>
+</kw>
+<status status="PASS" start="2024-04-29T19:59:51.522623" elapsed="2.622450"/>
+</test>
+<test id="s1-t4" name="Check for Pikachu" line="23">
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:54.187326" level="INFO">Current page contains text 'Pikachu'.</msg>
+<arg>Pikachu</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2024-04-29T19:59:54.148580" elapsed="0.038898"/>
+</kw>
+<status status="PASS" start="2024-04-29T19:59:54.147568" elapsed="0.039910"/>
+</test>
+<test id="s1-t5" name="Check for Electric" line="26">
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:54.231059" level="INFO">Current page contains text 'Electric'.</msg>
+<arg>Electric</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2024-04-29T19:59:54.191218" elapsed="0.039841"/>
+</kw>
+<status status="PASS" start="2024-04-29T19:59:54.188844" elapsed="0.044157"/>
+</test>
+<test id="s1-t6" name="Check for Static/Lightning Rod" line="29">
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:54.283098" level="INFO">Current page contains text 'Static'.</msg>
+<arg>Static</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2024-04-29T19:59:54.240917" elapsed="0.043233"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:54.328631" level="INFO">Current page contains text 'Lightning Rod'.</msg>
+<arg>Lightning Rod</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2024-04-29T19:59:54.286396" elapsed="0.042235"/>
+</kw>
+<kw name="Check Hover Text">
+<kw name="Mouse Over" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:54.334246" level="INFO">Simulating Mouse Over on element 'xpath=//p[@class='ability'][contains(text(), 'Static')]'.</msg>
+<arg>xpath=//p[@class='ability'][contains(text(), '${ability_name}')]</arg>
+<doc>Simulates hovering the mouse over the element ``locator``.</doc>
+<status status="PASS" start="2024-04-29T19:59:54.331274" elapsed="0.327647"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//p[@class='ability'][contains(text(), '${ability_name}')]/following-sibling::div[contains(@class, 'ability-effect-container')]</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2024-04-29T19:59:54.659104" elapsed="0.040219"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:54.744083" level="INFO">${actual_effect} = Paralyzes on contact.</msg>
+<var>${actual_effect}</var>
+<arg>xpath=//p[@class='ability'][contains(text(), '${ability_name}')]/following-sibling::div[contains(@class, 'ability-effect-container')]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-29T19:59:54.699323" elapsed="0.044760"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${actual_effect}</arg>
+<arg>${expected_effect}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2024-04-29T19:59:54.744083" elapsed="0.001272"/>
+</kw>
+<arg>Static</arg>
+<arg>Paralyzes on contact.</arg>
+<status status="PASS" start="2024-04-29T19:59:54.330259" elapsed="0.415096"/>
+</kw>
+<kw name="Check Hover Text">
+<kw name="Mouse Over" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:54.747714" level="INFO">Simulating Mouse Over on element 'xpath=//p[@class='ability'][contains(text(), 'Lightning Rod')]'.</msg>
+<arg>xpath=//p[@class='ability'][contains(text(), '${ability_name}')]</arg>
+<doc>Simulates hovering the mouse over the element ``locator``.</doc>
+<status status="PASS" start="2024-04-29T19:59:54.747551" elapsed="0.348211"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//p[@class='ability'][contains(text(), '${ability_name}')]/following-sibling::div[contains(@class, 'ability-effect-container')]</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2024-04-29T19:59:55.096764" elapsed="0.186965"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:55.328442" level="INFO">${actual_effect} = Draws electrical moves.</msg>
+<var>${actual_effect}</var>
+<arg>xpath=//p[@class='ability'][contains(text(), '${ability_name}')]/following-sibling::div[contains(@class, 'ability-effect-container')]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-29T19:59:55.283729" elapsed="0.044713"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${actual_effect}</arg>
+<arg>${expected_effect}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2024-04-29T19:59:55.329451" elapsed="0.000551"/>
+</kw>
+<arg>Lightning Rod</arg>
+<arg>Draws electrical moves.</arg>
+<status status="PASS" start="2024-04-29T19:59:54.746538" elapsed="0.583464"/>
+</kw>
+<status status="PASS" start="2024-04-29T19:59:54.234274" elapsed="1.096735"/>
+</test>
+<test id="s1-t7" name="Check for Correct Stats" line="35">
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:55.380203" level="INFO">${hp_stat} = 35</msg>
+<var>${hp_stat}</var>
+<arg>xpath=//div[@class='stat_label'][contains(text(), 'HP')]/following-sibling::div[@class='stat_value']</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-29T19:59:55.333027" elapsed="0.047176"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:55.439213" level="INFO">${atk_stat} = 55</msg>
+<var>${atk_stat}</var>
+<arg>xpath=//div[@class='stat_label'][contains(text(), 'Atk')]/following-sibling::div[@class='stat_value']</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-29T19:59:55.381464" elapsed="0.057749"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:55.494523" level="INFO">${def_stat} = 40</msg>
+<var>${def_stat}</var>
+<arg>xpath=//div[@class='stat_label'][contains(text(), 'Def')]/following-sibling::div[@class='stat_value']</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-29T19:59:55.440213" elapsed="0.055307"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:55.562627" level="INFO">${spatk_stat} = 50</msg>
+<var>${spatk_stat}</var>
+<arg>xpath=//div[@class='stat_label'][contains(text(), 'SpAtk')]/following-sibling::div[@class='stat_value']</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-29T19:59:55.496517" elapsed="0.066110"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:55.622494" level="INFO">${spdef_stat} = 50</msg>
+<var>${spdef_stat}</var>
+<arg>xpath=//div[@class='stat_label'][contains(text(), 'SpDef')]/following-sibling::div[@class='stat_value']</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-29T19:59:55.565168" elapsed="0.057326"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:55.682922" level="INFO">${spd_stat} = 90</msg>
+<var>${spd_stat}</var>
+<arg>xpath=//div[@class='stat_label'][contains(text(), 'Spd')]/following-sibling::div[@class='stat_value']</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-29T19:59:55.623765" elapsed="0.059157"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${hp_stat.strip()}</arg>
+<arg>35</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2024-04-29T19:59:55.685069" elapsed="0.002747"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${atk_stat.strip()}</arg>
+<arg>55</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2024-04-29T19:59:55.689026" elapsed="0.002080"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${def_stat.strip()}</arg>
+<arg>40</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2024-04-29T19:59:55.692018" elapsed="0.001923"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${spatk_stat.strip()}</arg>
+<arg>50</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2024-04-29T19:59:55.696023" elapsed="0.004230"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${spdef_stat.strip()}</arg>
+<arg>50</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2024-04-29T19:59:55.701700" elapsed="0.001705"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${spd_stat.strip()}</arg>
+<arg>90</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2024-04-29T19:59:55.705447" elapsed="0.002061"/>
+</kw>
+<status status="PASS" start="2024-04-29T19:59:55.331009" elapsed="0.377849"/>
+</test>
+<test id="s1-t8" name="Check Random Button" line="49">
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:55.712893" level="INFO">Clicking button 'xpath=//button[@id='random_button']'.</msg>
+<arg>xpath=//button[@id='random_button']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-29T19:59:55.712735" elapsed="1.248256"/>
+</kw>
+<kw name="Location Should Contain" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:56.983902" level="INFO">Current location contains '/pokemon_details/'.</msg>
+<arg>/pokemon_details/</arg>
+<doc>Verifies that the current URL contains ``expected``.</doc>
+<status status="PASS" start="2024-04-29T19:59:56.962025" elapsed="0.021877"/>
+</kw>
+<status status="PASS" start="2024-04-29T19:59:55.711002" elapsed="1.283162"/>
+</test>
+<test id="s1-t9" name="Check for Stats Text" line="53">
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:57.286440" level="INFO">Current page contains text 'Stats:'.</msg>
+<arg>Stats:</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2024-04-29T19:59:57.001498" elapsed="0.285940"/>
+</kw>
+<status status="PASS" start="2024-04-29T19:59:56.999496" elapsed="0.326687"/>
+</test>
+<test id="s1-t10" name="Check Our Teams Button" line="56">
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:57.473760" level="INFO">Clicking button 'xpath=//button[@id='teamlist_button']'.</msg>
+<arg>xpath=//button[@id='teamlist_button']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-29T19:59:57.472756" elapsed="0.691266"/>
+</kw>
+<kw name="Location Should Be" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:58.213308" level="INFO">Current location is 'http://localhost:5000/teamlist'.</msg>
+<arg>http://localhost:5000/teamlist</arg>
+<doc>Verifies that the current URL is exactly ``url``.</doc>
+<status status="PASS" start="2024-04-29T19:59:58.179915" elapsed="0.033393"/>
+</kw>
+<status status="PASS" start="2024-04-29T19:59:57.467235" elapsed="0.747084"/>
+</test>
+<test id="s1-t11" name="Check For All Members" line="60">
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:58.287751" level="INFO">Current page contains text 'sherman'.</msg>
+<arg>sherman</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2024-04-29T19:59:58.218556" elapsed="0.070188"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:58.344725" level="INFO">Current page contains text 'bsiffer'.</msg>
+<arg>bsiffer</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2024-04-29T19:59:58.289746" elapsed="0.056991"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:58.415692" level="INFO">Current page contains text 'dkozlova'.</msg>
+<arg>dkozlova</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2024-04-29T19:59:58.351742" elapsed="0.063950"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:58.461729" level="INFO">Current page contains text 'dmiranda'.</msg>
+<arg>dmiranda</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2024-04-29T19:59:58.418706" elapsed="0.043023"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:58.508636" level="INFO">Current page contains text 'jasfoury'.</msg>
+<arg>jasfoury</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2024-04-29T19:59:58.463243" elapsed="0.045393"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:58.555732" level="INFO">Current page contains text 'aseay'.</msg>
+<arg>aseay</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2024-04-29T19:59:58.516529" elapsed="0.039203"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:58.602397" level="INFO">Current page contains text 'ajaramillo'.</msg>
+<arg>ajaramillo</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2024-04-29T19:59:58.557730" elapsed="0.045698"/>
+</kw>
+<status status="PASS" start="2024-04-29T19:59:58.216555" elapsed="0.387870"/>
+</test>
+<test id="s1-t12" name="Check First Edit Button" line="69">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2024-04-29T19:59:58.608147" level="INFO">Clicking element 'xpath=(//a[@class='edit_link'])[1]'.</msg>
+<arg>xpath=(//a[@class='edit_link'])[1]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-29T19:59:58.607118" elapsed="1.539916"/>
+</kw>
+<kw name="Location Should Be" owner="SeleniumLibrary">
+<msg time="2024-04-29T20:00:00.172753" level="INFO">Current location is 'http://localhost:5000/edit/1'.</msg>
+<arg>http://localhost:5000/edit/1</arg>
+<doc>Verifies that the current URL is exactly ``url``.</doc>
+<status status="PASS" start="2024-04-29T20:00:00.149036" elapsed="0.023717"/>
+</kw>
+<status status="PASS" start="2024-04-29T19:59:58.605608" elapsed="1.570163"/>
+</test>
+<test id="s1-t13" name="Change First Pokemon To Pikachu" line="73">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2024-04-29T20:00:00.179773" level="INFO">Typing text 'pikachu' into text field 'id=pokemon_name_1'.</msg>
+<arg>id=pokemon_name_1</arg>
+<arg>pikachu</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-29T20:00:00.178773" elapsed="0.443857"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2024-04-29T20:00:00.624570" level="INFO">Clicking button 'xpath=//button[@type='submit']'.</msg>
+<arg>xpath=//button[@type='submit']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-29T20:00:00.624056" elapsed="3.534947"/>
+</kw>
+<status status="PASS" start="2024-04-29T20:00:00.176769" elapsed="4.002507"/>
+</test>
+<test id="s1-t14" name="Confirm Page Redirection to Teamlist" line="77">
+<kw name="Location Should Be" owner="SeleniumLibrary">
+<msg time="2024-04-29T20:00:04.212357" level="INFO">Current location is 'http://localhost:5000/teamlist'.</msg>
+<arg>http://localhost:5000/teamlist</arg>
+<doc>Verifies that the current URL is exactly ``url``.</doc>
+<status status="PASS" start="2024-04-29T20:00:04.191016" elapsed="0.021868"/>
+</kw>
+<status status="PASS" start="2024-04-29T20:00:04.181277" elapsed="0.034629"/>
+</test>
+<test id="s1-t15" name="Confirm Pikachu is First Pokemon" line="80">
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2024-04-29T20:00:04.333626" level="INFO">${first_pokemon_name} = Pikachu</msg>
+<var>${first_pokemon_name}</var>
+<arg>xpath=(//div[@class='member_container'])[1]//p[@class='pokemon_name']</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2024-04-29T20:00:04.221866" elapsed="0.111760"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${first_pokemon_name}</arg>
+<arg>Pikachu</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2024-04-29T20:00:04.335420" elapsed="0.000513"/>
+</kw>
+<status status="PASS" start="2024-04-29T20:00:04.220188" elapsed="0.116648"/>
+</test>
+<status status="PASS" start="2024-04-29T19:59:41.942703" elapsed="22.397664"/>
+</suite>
+<statistics>
+<total>
+<stat pass="15" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="15" fail="0" skip="0" id="s1" name="Test">Test</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2024-04-29T19:59:41.896976" level="WARN">Error in file 'C:\Users\shann\OneDrive\Documents\GitHub\GitHub-Desktop-Week3\project-g3-g3-csc-256-0001\src\tests\Automations\test.robot' on line 88: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2024-04-29T19:59:43.058962" level="WARN">The chromedriver version (123.0.6312.122) detected in PATH at C:\Windows\chromedriver.exe might not be compatible with the detected chrome version (124.0.6367.61); currently, chromedriver 124.0.6367.91 is recommended for chrome 124.*, so it is advised to delete the driver in PATH and retry</msg>
+</errors>
+</robot>

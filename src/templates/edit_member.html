@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Pokémon Team</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/edit_member.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/main.css') }}">
+</head>
+<body>
+        <div class="header_container">
+            <div class="pokemon_icon_container">
+                    <img class="pokeball_image" src="static/images/pokeball_icon.png">
+            </div>
+            <div class="header_name_container">
+                    <header class="header_name_container">
+                        <a href="/" class="nav_link">Home</a>
+                    </header>
+            </div>
+            <div class="pokemon_icon_container">
+                    <img class="pokeball_image" src="static/images/pokeball_icon.png">
+            </div>
+        </div>
+    <h1>Edit Pokémon Team for {{ member.name }}</h1>
+    <form method="POST">
+        {% for pokemon in member.pokemon %}
+            <label for="pokemon_name_{{ loop.index }}">Pokemon {{ loop.index }}</label>
+            <img class="pokemon_in_form_image" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{ pokemon.number }}.png" alt="{{ pokemon.name }}">
+            <input type="text" id="pokemon_name_{{ loop.index }}" name="pokemon_name_{{ loop.index }}" value="{{ pokemon.name }}" placeholder="Pokemon name" required>
+            <input class="hidden_number_field" type="number" id="pokemon_number_{{ loop.index }}" name="pokemon_number_{{ loop.index }}" value="{{ pokemon.number }}" placeholder="Pokemon number" required>
+            <br>
+        {% endfor %}
+        <button type="submit">Save</button>
+    </form>
+
+    <script src="{{ url_for('static', filename='edit_member.js') }}"></script>
+</body>
+</html>

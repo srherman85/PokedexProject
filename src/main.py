@@ -1,7 +1,10 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
 import requests
 import os
+import json
 import random
+from builtins import enumerate
+
 
 app = Flask(__name__)
 
@@ -16,6 +19,10 @@ def capitalize_first_letters(words):
 
 def get_number_from_name(name):
     try:
+        # If it contains a space, edit the name:
+        if " " in name:
+            name = name.replace(" ", "-")
+
         url = f"https://pokeapi.co/api/v2/pokemon/{name}"
         response = requests.get(url)
         data = response.json()
@@ -37,7 +44,6 @@ class Pokemon:
         self.abilities = {}
         self.stats = {}
         self.fetch_data()
-        self.image_url = None
 
     def fetch_data(self):
         try:
@@ -79,7 +85,7 @@ class Pokemon:
             self.abilities = {k: self.abilities[k] for k in list(self.abilities)[:3]}
 
             # Name
-            self.name = data['forms'][0]['name'].capitalize()
+            self.name = data['species']['name'].capitalize()
             if '-' in self.name:
                 self.modified_name = self.name.replace('-', " ")
                 for word in self.modified_name:
@@ -87,52 +93,170 @@ class Pokemon:
             else:
                 self.modified_name = self.name
 
-
             # Fetching stats
             stats_data = data['stats']
             for stat_info in stats_data:
                 stat_name = stat_info['stat']['name']
                 base_stat = stat_info['base_stat']
-                self.stats[capitalize_first_letters(stat_name)] = base_stat
-
-            # Fetching image URL
-            self.image_url = f"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{self.number}.png"
-            print(self.image_url)
-
-            # Download and save image
-            self.download_image()
+                formatted_stat_name = format_stat_name(stat_name)
+                self.stats[formatted_stat_name] = base_stat
 
         except Exception as e:
             print(f"Invalid ID.")
             exit()
 
-    def download_image(self):
-        if self.image_url:
-            try:
-                response = requests.get(self.image_url)
-                if response.status_code == 200:
-                    # Create 'static/images' folder if it doesn't exist
-                    os.makedirs('static/images', exist_ok=True)
-                    # Save image to 'static/images' folder with the pokemon number as filename
-                    with open(f'static/images/{self.number}.png', 'wb') as f:
-                        f.write(response.content)
-                    print("Image downloaded successfully.")
-                else:
-                    print("Failed to download image:", response.status_code)
-            except Exception as e:
-                print("Error downloading image:", e)
+
+def format_stat_name(stat_name):
+    formatted_names = {
+        'hp': 'HP',
+        'attack': 'Atk',
+        'defense': 'Def',
+        'special-attack': 'SpAtk',
+        'special-defense': 'SpDef',
+        'speed': 'Spd'
+    }
+    return formatted_names.get(stat_name.lower(), stat_name.capitalize())
+
+# SimplePokemon, which only uses name and display_name. This
+# allows the "Teamlist" route to load a lot faster, since it does
+# not have to worry about all the other attributes.
+class SimplePokemon:
+    def __init__(self, name, number):
+        self.name = name
+        self.number = number
+        self.display_name = name
+
+        if '-' in self.display_name:
+            self.display_name = self.display_name.replace('-', " ")
+            self.display_name = capitalize_first_letters(self.display_name)
+        else:
+            self.display_name = capitalize_first_letters(self.display_name)
+
+    def fetch_name_from_api(self):
+        try:
+            url = f"https://pokeapi.co/api/v2/pokemon/{self.number}"
+            response = requests.get(url)
+            data = response.json()
+            return data['species']['name'].capitalize()
+        except Exception as e:
+            print(f"Error retrieving Pokémon name from API: {e}")
+            return ""  # Return an empty string if unable to retrieve the name
+
+
+
+    def fetch_data(self):
+        # Since we're only interested in name and number, we can skip fetching other data
+        pass
+
+
+@app.route('/pokemon_details/<pokemon_number>')
+def pokemon_details(pokemon_number):
+    # Ensure pokemon_number is a string
+    pokemon_number = str(pokemon_number)
+    pokemon = Pokemon(pokemon_number)
+    return render_template('pokemon_details.html', pokemon=pokemon)
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    pokemon = None  # Initialize pokemon variable
+    error_message = None  # Initialize error message
+
     if request.method == 'POST':
         pokemon_number = request.form['pokemon_number']
-        if pokemon_number.lower() == 'random':
-            pokemon_number = str(random.randint(1, 1026))
-        pokemon = Pokemon(pokemon_number)
-        return render_template('index.html', pokemon=pokemon, pokemon_number=pokemon_number)
-    return render_template('index.html', pokemon=None, pokemon_number=None)
 
+        # Check if the form submission is empty
+        if not pokemon_number.strip():
+            error_message = "Please enter a Pokemon name or Pokedex number."
+        else:
+            if pokemon_number.lower() == 'r':
+                pokemon_number = str(random.randint(1, 1026))
+
+            # Validate the Pokemon number by making a request to the PokeAPI
+            if is_valid_pokemon_number(pokemon_number):
+                return redirect(url_for('pokemon_details', pokemon_number=pokemon_number))
+            else:
+                error_message = "Invalid Pokemon number. Please enter a valid Pokemon name or Pokedex number."
+
+    return render_template('index.html', pokemon=pokemon, error_message=error_message)
+
+def is_valid_pokemon_number(pokemon_number):
+    try:
+        response = requests.get(f'https://pokeapi.co/api/v2/pokemon/{pokemon_number}')
+        if response.status_code == 200:
+            return True
+        else:
+            return False
+    except Exception as e:
+        print(f"Error checking Pokemon number: {e}")
+        return False
+
+@app.route('/teamlist')
+def teamlist():
+    # Get the directory path where this script resides
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # Construct the absolute file path to the JSON file
+    json_file_path = os.path.join(current_dir, 'data_files', 'teamlist.json')
+
+    # Check if the file exists
+    if not os.path.exists(json_file_path):
+        raise FileNotFoundError(f"File not found: {json_file_path}")
+
+    # Load team members data from JSON file
+    with open(json_file_path, 'r') as file:
+        team_data = json.load(file)
+
+    # Modify the team data to include Pokemon instances
+    for member in team_data['team_members']:
+        # Extract name and number from each pokemon dictionary
+        pokemon_data = member['pokemon']
+        member['pokemon'] = [
+            SimplePokemon(pokemon['name'], pokemon['number']) for pokemon in pokemon_data
+        ]
+
+    return render_template('teamlist.html', team_members=team_data["team_members"])
+
+@app.route('/edit/<int:member_index>', methods=['GET', 'POST'])
+def edit_member(member_index):
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    json_file_path = os.path.join(current_dir, 'data_files', 'teamlist.json')
+
+    with open(json_file_path, 'r') as file:
+        team_data = json.load(file)
+
+    member = team_data['team_members'][member_index - 1]
+
+    if request.method == 'POST':
+        new_pokemon_data = []
+        for i in range(1, 7):
+            pokemon_name = request.form[f'pokemon_name_{i}']
+
+            # Fetch the Pokémon number from the PokeAPI
+            pokemon_number = get_number_from_name(pokemon_name)
+
+            new_pokemon_data.append({"name": pokemon_name, "number": str(pokemon_number)})
+
+        # Update the Pokémon team data in the JSON file
+        team_data['team_members'][member_index - 1]['pokemon'] = new_pokemon_data
+        with open(json_file_path, 'w') as file:
+            json.dump(team_data, file, indent=4)
+
+        return redirect(url_for('teamlist'))
+
+    return render_template('edit_member.html', member=member)
+
+def get_number_from_name(name):
+    try:
+        if " " in name:
+            name = name.replace(" ", "-")
+
+        url = f"https://pokeapi.co/api/v2/pokemon/{name.lower()}"
+        response = requests.get(url)
+        data = response.json()
+        return data['id']
+    except Exception as e:
+        print(f"Error retrieving Pokémon number from name: {e}")
+        return 0  # Return 0 if unable to retrieve number
 
 if __name__ == "__main__":
     app.run(debug=True)

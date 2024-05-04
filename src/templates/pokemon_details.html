@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1">
+    <title>{{ pokemon.modified_name }}</title>
+    <style>
+        /* CSS to capitalize first letter of each word */
+        .capitalize {
+            text-transform: capitalize;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/main.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header_container">
+            <div class="pokemon_icon_container">
+                {% if not pokemon.number %}
+                    <img class="pokeball_image" src="static/images/pokeball_icon.png">
+                {% else %}
+                    <img class="pokemon_icon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{ pokemon.number }}.png">
+                {% endif %}
+            </div>
+            <div class="header_name_container">
+                    <header class="header_name_container">
+                        <a href="/" class="nav_link">Home</a>
+                    </header>
+            </div>
+            <div class="pokemon_icon_container">
+                {% if not pokemon.number %}
+                    <img class="pokeball_image" src="static/images/pokeball_icon.png">
+                {% else %}
+                    <img class="pokemon_icon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{ pokemon.number }}.png">
+                {% endif %}
+            </div>
+        </div>
+        <div class="form_container">
+            <form action="/" method="post">
+                <div class="form_label">
+                    <label for="pokemon_number">Enter Pokémon Name or Pokedex Number:</label>
+                </div>
+                <div class="input_container">
+                    <input class="input_box" type="text" id="pokemon_number" name="pokemon_number">
+                </div>
+                <div id="error_message" class="error_message"></div>
+                <div class="button_container">
+                    <button class="input_button" type="submit">Submit</button>
+                    <button class="random_button" type="button" id="random_button">Random</button>
+                </div>
+                <div class="team_container">
+                    <p class="form_label">Or, view our teams:</p>
+                    <button class="teamlist_button my_teams_button" type="button" id="teamlist_button" onclick="location.href='/teamlist'">Our Teams</button>
+                </div>
+                <div class="team_selection">
+                    <p class="team_label">Or, pick a team:</p>
+                    <select id="team_dropdown" onchange="location = this.value;">
+                        <option value="#" selected disabled>Select a team...</option>
+                        <option value="/edit/1">sherman</option>
+                        <option value="/edit/2">bsiffer</option>
+                        <option value="/edit/3">dkozlova</option>
+                        <option value="/edit/4">dmiranda</option>
+                        <option value="/edit/5">jasfoury</option>
+                        <option value="/edit/6">aseay</option>
+                        <option value="/edit/7">ajaramillo</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+
+        <div class="main_container">
+            {% if pokemon %}
+                <div class="pokemon_image_container">
+                    <img class="pokemon_image" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{ pokemon.number }}.png">
+                </div>
+
+                <div class="pokemon_info_container">
+                    <div class="name_number_container">
+                        <div class="name_container">
+                            <p class="pokemon_name">{{ pokemon.modified_name }} - #{{ pokemon.number}}</p>
+                        </div>
+                    </div>
+
+                    <div class="type_container">
+                        <div class="type_header">
+                            <p>Type(s):</p>
+                        </div>
+                        <div class="pokemon_type_container">
+                            {% for type in pokemon.types %}
+                            <div class="type_display">
+                                <img class="pokemon_type_image" src="{{ url_for('static', filename='images/' + type.lower() + '_icon.png') }}">
+                                <p class="type_name">{{ type }}</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="abilities_container">
+                        <div class="abilities_header">
+                            <p>Abilities:</p>
+                        </div>
+                        <div class="abilities_list">
+                            {% for ability_name, ability_effect in pokemon.abilities.items() %}
+                            <div class="ability-container">
+                                <p class="ability">{{ ability_name }}</p>
+                                <!-- ability effect -->
+                                <div class="ability-effect-container">
+                                    <p class="ability-effect">{{ ability_effect }}</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="stats_container">
+                    <div class="stats_header">Stats:</div>
+    {% for stat_name, stat_value in pokemon.stats.items() %}
+        <div class="stat_row">
+            <div class="stat_label">{{ stat_name }}:</div>
+            <div class="stat_value">{{ stat_value }}</div>
+        </div>
+    {% endfor %}
+</div>
+            {% else %}
+            {% endif %}
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+</body>
+</html>
